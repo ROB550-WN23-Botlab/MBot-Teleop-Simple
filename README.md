@@ -24,12 +24,14 @@ You will have to connect to the Raspberry Pi through **three** terminals, each r
 1. The **first** terminal window that connects to the Raspberry Pi should run the *shim* binary, which allows the Pico and Raspberry Pi to send messages through LCM. Run this through `botlab-w23`
 
 ```bash
-./pico_shim
+cd ~/botlab-w23/build/bin
+./pico_shim # Might need to run this with sudo
 ```
 
 2. The **second** terminal window that connects to the Raspberry Pi should run the *timesync* binary. Similarly, run this with `botlab-w23`
 
 ```bash
+cd ~/botlab-w23/build/bin
 ./timesync
 ```
 
