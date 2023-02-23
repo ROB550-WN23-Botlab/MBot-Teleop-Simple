@@ -18,7 +18,7 @@ Additionally, ensure that the channel `/dev/video0` is an open port on your devi
 
 ## Usage
 
-You will have to connect to the Raspberry Pi through **three** terminals, each running a different program, in order to run this program. 
+You will have to connect to the Raspberry Pi through **three** terminals, each running a different program, in order to run this program. Make sure that you have flashed the Pico with `pico-teleop.uf2` before starting this process.
 
 
 1. The **first** terminal window that connects to the Raspberry Pi should run the *shim* binary, which allows the Pico and Raspberry Pi to send messages through LCM. Run this through `botlab-w23`
