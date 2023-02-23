@@ -4,7 +4,7 @@ import numpy as np
 from lcmtypes import mbot_motor_command_t, timestamp_t
 import time
 import sys
-
+import cv2
 
 def main():
     lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=1")
@@ -20,12 +20,23 @@ def main():
     green = (0, 255, 0)
     blue = (0, 0, 128)
 
+    screen2 = pygame.display.set_mode([640,480])
+
     time.sleep(0.5)
     while True:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+        cap = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
+        ret, frame = cap.read()
+        screen2.fill([0,0,0])
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image = image.swapaxes(0,1)
+        image = cv2.flip(image, -1)
+        image = pygame.surfarray.make_surface(image)
+        screen.blit(image, (0,0))
         key_input = pygame.key.get_pressed() 
         cur_motor_command = mbot_motor_command_t()
         cur_motor_command.trans_v = 0.0
