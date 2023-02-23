@@ -23,25 +23,27 @@ def main():
     screen2 = pygame.display.set_mode([640,480])
 
     time.sleep(0.5)
+    cap = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
     while True:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-        cap = cv2.VideoCapture('/dev/video0', cv2.CAP_V4L)
         ret, frame = cap.read()
         screen2.fill([0,0,0])
         image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         image = image.swapaxes(0,1)
         image = cv2.flip(image, -1)
         image = pygame.surfarray.make_surface(image)
-        screen.blit(image, (0,0))
+        screen2.blit(image, (0,0))
         key_input = pygame.key.get_pressed() 
         cur_motor_command = mbot_motor_command_t()
         cur_motor_command.trans_v = 0.0
         cur_motor_command.angular_v = 0.0
-        screen.fill(white)
+        # screen.fill(white)
         if key_input[pygame.K_q]:
             pygame.quit()
             sys.exit()
@@ -62,7 +64,7 @@ def main():
             text2 = smaller_font.render('arrow keys to drive | q to quit', True, red, blue)
             textRect2 = text2.get_rect()
             textRect2.center = (100, 150)
-            screen.blit(text2, textRect2)
+            # screen.blit(text2, textRect2)
 
         # add timestamp
         current_time = int(time.time() * 1e6)
