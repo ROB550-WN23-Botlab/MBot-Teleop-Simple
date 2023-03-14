@@ -49,16 +49,16 @@ def main():
             sys.exit()
         if key_input[pygame.K_LEFT]:
             text = font.render('LEFT', True, green, blue)
-            cur_motor_command.angular_v = 2.0
+            cur_motor_command.angular_v = -2.0
         elif key_input[pygame.K_RIGHT]:
             text = font.render('RIGHT', True, green, blue)
-            cur_motor_command.angular_v = -2.0
+            cur_motor_command.angular_v = +2.0
         if key_input[pygame.K_UP]:
             text = font.render('FORWARD', True, green, blue)
-            cur_motor_command.trans_v = 0.25 # m/s
+            cur_motor_command.trans_v = -0.25 # m/s
         elif key_input[pygame.K_DOWN]:
             text = font.render('BACKWARD', True, green, blue)
-            cur_motor_command.trans_v = -0.25 # m/s
+            cur_motor_command.trans_v = +0.25 # m/s
         if (cur_motor_command.trans_v == 0.0 and cur_motor_command.angular_v == 0.0):
             text = font.render('STOPPED', True, red, blue)
             text2 = smaller_font.render('arrow keys to drive | q to quit', True, red, blue)
